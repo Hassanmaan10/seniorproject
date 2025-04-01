@@ -1,26 +1,64 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-midnight-blue-100: #25527e;
+  --color-midnight-blue-200: #295b8c;
+  --color-midnight-blue-300: #2d659c;
+  --color-midnight-blue-400: #3271ad;
+  --color-midnight-blue-500: #387dc0;
+  --color-midnight-blue-600: #3e89d3;
+  --color-midnight-blue-700: #4497e8;
+  --color-midnight-blue-800: #4ba6ff;
+  --color-midnight-blue-900: #4ba6ff;
+
+  --color-blue-100: #0e5192;
+  --color-blue-200: #0f5aa3;
+  --color-blue-300: #1164b5;
+  --color-blue-400: #1370c9;
+  --color-blue-500: #1788f5;
+  --color-blue-600: #1996ff;
+  --color-blue-700: #1ca5ff;
+  --color-blue-800: #1fb6ff;
+
+  --color-teal-100: #1b7987;
+  --color-teal-200: #1e8696;
+  --color-teal-300: #2195a7;
+  --color-teal-400: #25a6b9;
+  --color-teal-500: #2dcae3;
+  --color-teal-600: #32dff9;
+  --color-teal-700: #37f5ff;
+  --color-teal-800: #3cffff;
+
+  --color-sea-green-100: #347567;
+  --color-sea-green-200: #3a8272;
+  --color-sea-green-300: #41907f;
+  --color-sea-green-400: #48a08d;
+  --color-sea-green-500: #58c4ad;
+  --color-sea-green-600: #61d7be;
+  --color-sea-green-700: #6aedd1;
+  --color-sea-green-800: #75ffe6;
+
+  --color-forest-green-100: #397535;
+  --color-forest-green-200: #3f823b;
+  --color-forest-green-300: #469042;
+  --color-forest-green-400: #4ea049;
+  --color-forest-green-500: #60c459;
+  --color-forest-green-600: #69d762;
+  --color-forest-green-700: #74ed6c;
+  --color-forest-green-800: #7fff77;
+
+  --color-blue-light: rgba(21, 124, 223, 0.6);
+  --color-green-light: rgba(83, 182, 152, 0.6);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+.bg-gradient-light {
+  background: linear-gradient(
+    269.86deg,
+    var(--color-blue-light) 0.04%,
+    var(--color-green-light) 95.59%
+  );
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.custom-blur {
+  backdrop-filter: blur(100px);
 }
