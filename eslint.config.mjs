@@ -1,62 +1,66 @@
 import { dirname } from "path";
 import { fileURLToPath } from "url";
 import { FlatCompat } from "@eslint/eslintrc";
+import tailwind from "eslint-plugin-tailwindcss";
+import prettierConfig from "eslint-config-prettier";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const compat = new FlatCompat({
   baseDirectory: __dirname,
-  recommendedConfig: { root: true }, // Fixed the missing parameter
+  recommendedConfig: { root: true },
   ignorePatterns: ["components/ui/**"],
-  overrides: [
-    {
-      files: ["*.ts", "*.tsx"],
-      rules: {
-        "no-undef": "off",
-      },
-    },
-  ],
-  rules: {
-    "import/order": [
-      "error",
-      {
-        groups: [
-          "builtin", // Built-in types are first
-          "external", // External libraries
-          "internal", // Internal modules
-          ["parent", "sibling"], // Parent and sibling types can be mingled together
-          "index", // Then the index file
-          "object", // Object imports
-        ],
-        newlinesBetween: "always",
-        pathGroups: [
-          {
-            pattern: "@app/**",
-            group: "external",
-            position: "after",
-          },
-        ],
-        pathGroupsExcludedImportTypes: ["builtin"],
-        alphabetize: {
-          order: "asc",
-          caseInsensitive: true,
-        },
-      },
-    ],
-  },
 });
 
-const eslintConfig = [
+export default [
+  // Base configs
   ...compat.extends(
     "next/core-web-vitals",
     "next/typescript",
     "eslint:recommended",
-    "standard",
-    "plugin:tailwindcss/recommended",
-    "prettier"
+    "standard"
   ),
   ...compat.plugins("import", "promise", "n"),
-];
 
-export default eslintConfig;
+  // Prettier config (must come after other configs)
+  prettierConfig,
+
+  // TailwindCSS config
+  {
+    files: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"],
+    plugins: {
+      tailwindcss: tailwind,
+    },
+    rules: {
+      ...tailwind.configs.recommended.rules,
+      "no-undef": "off",
+      "import/order": [
+        "error",
+        {
+          groups: [
+            "builtin",
+            "external",
+            "internal",
+            ["parent", "sibling"],
+            "index",
+            "object",
+          ],
+          newlinesBetween: "always",
+          pathGroups: [
+            {
+              pattern: "@app/**",
+              group: "external",
+              position: "after",
+            },
+          ],
+          pathGroupsExcludedImportTypes: ["builtin"],
+          alphabetize: {
+            order: "asc",
+            caseInsensitive: true,
+          },
+        },
+      ],
+    },
+  },
+];
