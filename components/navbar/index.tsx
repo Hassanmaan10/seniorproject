@@ -1,6 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import { Button } from "@/components/ui/button";
+import ROUTES from "@/constants/routes";
 
 const Navbar = () => {
   return (
@@ -15,7 +16,7 @@ const Navbar = () => {
       <p className="max-lg:hidden">Links</p>
 
       <Button className="bg-forest-green-850 text-2xl p-6 hover:bg-sky-700">
-        Sign Up
+        <Link href={ROUTES.SIGN_IN}>Sign In</Link>
       </Button>
     </nav>
   );
